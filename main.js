@@ -1,0 +1,1 @@
+p.innerHTML = document.querySelector(".timestamp")
