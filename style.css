@@ -1,13 +1,45 @@
-img {
-    width: 50%;
-    height: auto;
-    object-fit: cover;
-}
-
 .card {
     width: 18rem;
+    height: 18rem; 
+    border: 1px solid rgba(0,0,0,0);
+    margin-bottom: 2rem;
+}
+.card-img {
+    width: 18rem;
+    height: 18rem;
+    object-fit: fill;   
+    padding: 0;
+    border-width: 0.2rem;
+    border-color: rgb(138, 138, 151);
+    border-radius: 0;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgb(191, 192, 196);
+}
+iframe {
+    width: 100%;
+    height: 18rem;
+    object-fit: fill;
+    padding: 0;
+    border-width: 0.2rem;
+    border-color: rgb(138, 138, 151);
+    border-radius: 0;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgb(191, 192, 196);
+}
+.card-body {
+    width: 18rem;
+    height: 18rem;
+    font-family: Roboto, sans-serif;
+    background-color: rgba(91, 101, 138, 0.781);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgb(191, 192, 196);
+}
+.card-subtitle {
+    font-size: 0.8rem;    
+}
+.blockquote {
+    font-size: 0.6rem;
+}
+.card-link {
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+
 }
 
-.col {
-    width: 20rem;
-}

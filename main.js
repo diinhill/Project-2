@@ -3,22 +3,33 @@ console.log('data', data)
 function createCards() {
     var row = document.getElementById("row")
 
-
     for (var i = 0; i < data.length; i++) {
 
         var col = document.createElement("div")
         col.setAttribute("class", "col-sm-12 col-md-6 col-lg-4")
 
         var card = document.createElement("div")
-        card.setAttribute("class", "card")
+        card.setAttribute("class", "card embed-responsive")
 
         var cardBody = document.createElement("div")
+        cardBody.setAttribute("class", "card-body position-absolute text-white")
+
+        var cardTitle = document.createElement("div")
+        cardTitle.innerHTML = data[i].title
+        cardTitle.setAttribute("class", "card-title position-absolute top-50 start-50 translate-middle")
+
+        var cardDate = document.createElement("div")
+        cardDate.setAttribute("class", "card-subtitle position-absolute bottom-0 start-98")
+
+        var cardCopyright = document.createElement("div")
+        cardCopyright.innerHTML = data[i].date + " by:<br>" + data[i].copyright
+        cardCopyright.setAttribute("class", "blockquote position-absolute bottom-0 start-98")
 
 
         if (data[i].media_type == "image") {
             var cardMedia = document.createElement("img")
             cardMedia.setAttribute("src", data[i].url)
-            // td3.setAttribute("class", "img-fluid img-thumbnail")
+            cardMedia.setAttribute("class", "card-img")
             console.log(cardMedia)
         } else if (data[i].media_type == "video") {
             var cardMedia = document.createElement("iframe")
@@ -26,31 +37,37 @@ function createCards() {
             cardMedia.setAttribute("class", "embed-responsive-item")
             console.log(cardMedia)
         } else {
-            var cardMedia = document.createElement("a")
-            cardMedia.setAttribute("target", "blank")
-            cardMedia.setAttribute("href", data[i].apod_site)
-            cardMedia.innerHTML = data[i].apod_site
+            var cardMedia = document.createElement("img")
+            cardMedia.setAttribute("class", "card-img")
+            var cardTitle = document.createElement("a")
+            cardTitle.setAttribute("class", "card-link text-white position-absolute top-50 start-50 translate-middle")
+            cardTitle.setAttribute("target", "blank")
+            cardTitle.setAttribute("href", data[i].apod_site)
+            cardTitle.innerHTML = data[i].title
             console.log(cardMedia)
         }
 
-        
-        /*
-        td1.innerHTML = data[i].title
-        td2.innerHTML = data[i].date
-        */
-       
-        
-        
-
-        col.appendChild(card)
-        card.appendChild(cardMedia)
-        card.appendChild(cardBody)
-      
         row.appendChild(col)
+        col.appendChild(card)
+        card.appendChild(cardBody)
+        cardBody.appendChild(cardTitle)
+        cardBody.appendChild(cardDate)
+        cardBody.appendChild(cardCopyright)    
+        card.appendChild(cardMedia)  
     }
 }
 
 createCards()
+
+/*function mouseOverCard(event) {
+    if (event.target.class = "card-img"
+}
+cardBody.addEventListener("mouseover", mouseOverCard()) {
+    
+}
+
+
+
 
 
 /*
