@@ -1,73 +1,97 @@
 console.log('data', data)
 
-function createCards() {
-    var row = document.getElementById("row")
+const createCards = () => {
+    const row = document.getElementById("row")
+    const rowContainer = document.getElementById("row-container")
+    
 
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
 
-        var col = document.createElement("div")
-        col.setAttribute("class", "col-sm-12 col-md-6 col-lg-4")
+        const col = document.createElement("div")
+            col.setAttribute("class", "col-sm-12 col-md-6 col-lg-4")
+            row.appendChild(col)
 
-        var card = document.createElement("div")
-        card.setAttribute("class", "card embed-responsive")
+        const card = document.createElement("div")
+            card.setAttribute("class", "card embed-responsive position-relative")
+            col.appendChild(card)
 
-        var cardBody = document.createElement("div")
-        cardBody.setAttribute("class", "card-body position-absolute text-white")
+        const cardBody = document.createElement("div")
+            cardBody.setAttribute("class", "card-body embed-responsive position-absolute")
+            card.appendChild(cardBody)
 
-        var cardTitle = document.createElement("div")
-        cardTitle.innerHTML = data[i].title
-        cardTitle.setAttribute("class", "card-title position-absolute top-50 start-50 translate-middle")
+        const cardTitle = document.createElement("div")
+            cardTitle.innerHTML = data[i].title
+            cardTitle.setAttribute("class", "card-title position-absolute")
+            cardBody.appendChild(cardTitle)
 
-        var cardDate = document.createElement("div")
-        cardDate.setAttribute("class", "card-subtitle position-absolute bottom-0 start-98")
+        const cardDate = document.createElement("div")
+            cardDate.setAttribute("class", "card-subtitle position-absolute bottom-0 start-98")
+            cardBody.appendChild(cardDate)
 
-        var cardCopyright = document.createElement("div")
-        cardCopyright.innerHTML = data[i].date + " by:<br>" + data[i].copyright
-        cardCopyright.setAttribute("class", "blockquote position-absolute bottom-0 start-98")
+        const cardCopyright = document.createElement("div")
+            cardCopyright.innerHTML = data[i].date + " by:<br>" + data[i].copyright
+            cardCopyright.setAttribute("class", "blockquote position-absolute bottom-0 start-98")
+            cardBody.appendChild(cardCopyright)   
 
+        const modalImages = document.createElement("div")
+        modalImages.setAttribute("class", "modal") 
+        modalImages.removeAttribute("class", "card embed-responsive position-relative")
+       
 
         if (data[i].media_type == "image") {
-            var cardMedia = document.createElement("img")
-            cardMedia.setAttribute("src", data[i].url)
-            cardMedia.setAttribute("class", "card-img")
-            console.log(cardMedia)
-        } else if (data[i].media_type == "video") {
-            var cardMedia = document.createElement("iframe")
-            cardMedia.setAttribute("src", data[i].url)
-            cardMedia.setAttribute("class", "embed-responsive-item")
-            console.log(cardMedia)
-        } else {
-            var cardMedia = document.createElement("img")
-            cardMedia.setAttribute("class", "card-img")
-            var cardTitle = document.createElement("a")
-            cardTitle.setAttribute("class", "card-link text-white position-absolute top-50 start-50 translate-middle")
-            cardTitle.setAttribute("target", "blank")
-            cardTitle.setAttribute("href", data[i].apod_site)
-            cardTitle.innerHTML = data[i].title
-            console.log(cardMedia)
-        }
+            const cardImage = document.createElement("img")
+            cardImage.setAttribute("src", data[i].url)
+            cardImage.setAttribute("class", "card-img embed-responsive-item position-absolute")
+            console.log(cardImage)
+            card.appendChild(cardImage)
 
-        row.appendChild(col)
-        col.appendChild(card)
-        card.appendChild(cardBody)
-        cardBody.appendChild(cardTitle)
-        cardBody.appendChild(cardDate)
-        cardBody.appendChild(cardCopyright)    
-        card.appendChild(cardMedia)  
+      
+            card.addEventListener("click", imageEnlarge)
+            function imageEnlarge() {
+                const cloneImage = document.createElement("img")
+                cloneImage.setAttribute("src", data[i].url)
+                cloneImage.setAttribute("style", "overflow-x: scroll")
+                cloneImage.setAttribute("class", "modal-content")
+                cloneImage.style.visibility = "visible"
+                row.append(cloneImage)
+            }
+        }
+        if (data[i].media_type == "video") {   
+            const cardIframe = document.createElement("iframe")
+            cardIframe.setAttribute("src", data[i].url)
+            cardIframe.setAttribute("class", "embed-responsive-item position-absolute")
+            console.log(cardIframe)
+            card.appendChild(cardIframe)
+        }
+        if (data[i].media_type == "other") {   
+            const cardImage = document.createElement("img")
+            cardImage.setAttribute("class", "card-img")
+            const cardLink = document.createElement("a")
+            cardLink.setAttribute("class", "card-link text-white position-absolute")
+            cardLink.setAttribute("target", "blank")
+            cardLink.setAttribute("href", data[i].apod_site)
+            cardLink.append(cardTitle)
+            console.log(cardLink)
+            card.appendChild(cardImage)
+            cardBody.appendChild(cardLink)
+        }  
+        
+        card.addEventListener("mouseover", mouseOver)
+        card.addEventListener("mouseleave", mouseLeave)
+        
+            function mouseOver() {
+                cardBody.style.visibility = "visible"
+            }
+            function mouseLeave() {
+                cardBody.style.visibility = "hidden"
+            }
+         
+        
     }
+
 }
 
 createCards()
-
-/*function mouseOverCard(event) {
-    if (event.target.class = "card-img"
-}
-cardBody.addEventListener("mouseover", mouseOverCard()) {
-    
-}
-
-
-
 
 
 /*
