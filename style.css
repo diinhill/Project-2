@@ -1,3 +1,59 @@
+body {
+    margin: 0;
+    background: #000; 
+  }
+video { 
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -100;
+      transform: translateX(-50%) translateY(-50%);
+      background: url('images/starryNight.jpg') no-repeat;
+      background-size: cover;
+      transition: 1s opacity;
+  }
+  .stopfade { 
+     opacity: .5;
+  }
+  .input-group {
+      display: grid;
+      width: 50%;
+      margin: auto;
+  }
+  label {
+      font-family: 'Play', sans-serif; 
+      color: rgba(244, 245, 255, 0.911);
+      margin-left: 40%;
+      margin-bottom: 1em;
+  }
+.mb-1 {
+    visibility: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .card {
     width: 18rem;
     height: 18rem; 
@@ -10,7 +66,7 @@
     height: 18rem;
     object-fit: cover;
 }
-iframe {
+.card-iframe {
     width: 100%;
     height: 18rem;
     object-fit: cover;
@@ -67,23 +123,34 @@ iframe {
 
 .modal {
     display: block;
+
+    position:fixed; 
+    top: 0;
+    left: 0;
 }
 .fade:not(.show) {
     opacity: 100;
 }
+.modal-dialog {
+    position: absolute;
+    width: 100%;
+    height: 100%; 
+}
 .modal-content {
-    vertical-align: middle;
     width: 100%;
     height: 100%;
     background-color: rgba(211, 211, 223, 0.452);
+
+    position: relative;  /**/
+    display: flex;
+    flex-direction: row;
 }
 .modal-body {
-   max-width: 90%;
    max-height: 90%;
-   flex: 0 0 auto;
-   margin-top: 2rem;
-   align-self: center;
+   max-width: 90%;
    padding: unset;
+   margin: auto;
+   position: relative;
    background-color: rgba(24, 24, 44, 0.452);
    border: 0.11rem solid rgba(173, 173, 173, 0.911);
    box-shadow: 1rem 1rem 5rem  rgb(14, 13, 26);
@@ -92,31 +159,40 @@ iframe {
     width: 100%;
     height: auto;
 }
+.modal-body-iframe {
+    width: 100%;
+    background-color: rgba(24, 24, 44, 0.452);
+    border: 0.11rem solid rgba(173, 173, 173, 0.911);
+    box-shadow: 1rem 1rem 5rem  rgb(14, 13, 26);  
+}
 .airtable-embed {
-    width: auto;
-    height: auto;
-    border: 0; 
+    width: 100%;
+    height: 100%;
 }
 .modal-header {
-    width: 100%;
-    align-self: center;
+    width: 89%;
     padding: 0em 0.5em;
     background-color: rgba(8, 8, 36, 0.39);
     color: rgba(244, 245, 255, 0.911);
     font-family: 'Space Mono', monospace; 
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+}
+.modal-iframe-header {
+    width: 100%;
+    padding: 0em 0.5em;
+    background-color: rgba(8, 8, 36, 0.39);
+    color: rgba(244, 245, 255, 0.911);
+    font-family: 'Space Mono', monospace; 
+    position: relative;
 }
 .close {
-    border: none;
     background-color: transparent;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: right;
-   
-    min-width: 10ch;
+    min-width: 3ch;
     min-height: 44px;
-    width: 0.4rem;
-    height: 0.4rem
-
 }
 .buttonSpan {
     text-align: center;

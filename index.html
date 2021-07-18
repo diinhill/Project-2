@@ -14,23 +14,31 @@
 </head>
 
 <body>    
+    <div class="video-container">
+        <video id="starryBgLoop" controls preload="true" autoplay loop muted>
+            <source src="images/starrySkyLoop.mp4" type="video/mp4"> 
+            <source src="images/starrySkyLoop.ogv" type="video/ogv">    
+            <source src="images/starrySkyLoop.webm" type="video/webm"> 
+         </video>
+         <!-- <div id="bgImages" class="bg-image-container">
+            <img src="images/starryNight.jpg" alt="">
+        </div> --> -->
+    </div>
+
+    <div id="headerFrontP" class="container">
+        <h1 class="mb-1">latest pics from outer space</h1>
+    </div>    
+
+    <div id="searchContainer" class="container">
+        <div id="searchBar" class="input-group">
+            <label for="site-search">search for images</label>
+            <input type="search" id="site-search" name="site-search"
+            aria-label="search for images">
+        <div class="overlay"></div>
+        </div>
+    </div>
     
     <div id="popUpImages" class="container"></div>
-
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-nav-item"><a class="js-scroll-trigger" href="#home">home</a></li>
-            <li class="sidebar-nav-item"><a class="js-scroll-trigger" href="#about">about</a></li>
-            <li class="sidebar-nav-item"><a class="js-scroll-trigger" href="#search-images">search images</a></li>
-        </ul>
-    </nav>
-
-    <header>
-        <div class="container">
-            <h1 class="mb-1">latest pics from outer space</h1>
-        </div>
-        <div class="overlay"></div>
-    </header>
 
 
     <div id="row-container" class="container">
