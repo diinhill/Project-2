@@ -217,7 +217,7 @@ const createCards = () => {
 
 }
 
-/*createCards()*/
+createCards()
 
 
 /*
