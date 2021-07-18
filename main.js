@@ -1,5 +1,15 @@
 console.log('data', data)
 
+/*const bgImages = document.getElementById("bgImages")
+bgImages.style.position = "relative"*/
+
+/*why is this not working?
+const headerFrontP = document.getElementsByClassName("mb-1")
+headerFrontP.style.visibility = "hidden"*/
+
+const searchBar = document.getElementById("searchBar")
+
+
 const createCards = () => {
     const row = document.getElementById("row")
     const popUpImages = document.getElementById("popUpImages")
@@ -52,7 +62,7 @@ const createCards = () => {
         else if (data[i].media_type == "video") {   
             const cardIframe = document.createElement("iframe")
             cardIframe.setAttribute("src", data[i].url)
-            cardIframe.setAttribute("class", "embed-responsive-item position-absolute")
+            cardIframe.setAttribute("class", "card-iframe embed-responsive-item position-absolute")
             console.log(cardIframe)
             card.appendChild(cardIframe)
             card.addEventListener("click", videoEnlarge)
@@ -101,7 +111,7 @@ const createCards = () => {
                 modalDialog.appendChild(modalContent)
 
                 const modalHeader = document.createElement("div")
-                modalHeader.setAttribute("class", "modal-header position-absolute")
+                modalHeader.setAttribute("class", "modal-header")
                 /*modalContent.appendChild(modalHeader)*/
 
                 const modalTitle = document.createElement("h5")
@@ -137,7 +147,6 @@ const createCards = () => {
 
                     const modalImage = document.createElement("img")
                     modalImage.setAttribute("src", data[i].url)
-                    /*modalImage.setAttribute("style", "overflow-x: scroll")*/
                     modalImage.setAttribute("class", "modal-image")
                     modalBody.appendChild(modalImage)
 
@@ -150,7 +159,6 @@ const createCards = () => {
             function videoEnlarge() {
                 const modalImages = document.createElement("div")
                 modalImages.setAttribute("class", "modal")
-                /*modalImages.setAttribute("tabindex", "-1") */
                 modalImages.setAttribute("role", "dialog")
                 modalImages.setAttribute("aria-labelledby", "modalLabel")
                 modalImages.setAttribute("aria-hidden", "true")
@@ -165,22 +173,20 @@ const createCards = () => {
                 modalContent.setAttribute("class", "modal-content")
                 modalDialog.appendChild(modalContent)
 
-                const modalHeader = document.createElement("div")
-                modalHeader.setAttribute("class", "modal-header")
-                /*modalContent.appendChild(modalHeader)*/
+                const modalIframeHeader = document.createElement("div")
+                modalIframeHeader.setAttribute("class", "modal-header modal-iframe-header")
+                modalContent.appendChild(modalIframeHeader)
 
-                const modalTitle = document.createElement("h5")
-                modalTitle.setAttribute("class", "modal-title")
-                modalTitle.setAttribute("id", "modalLabel")
-                modalTitle.innerHTML = cardTitle.innerHTML
-                modalHeader.appendChild(modalTitle)
+                const modalIframeTitle = document.createElement("h5")
+                modalIframeTitle.setAttribute("class", "modal-title modal-iframe-title")
+                modalIframeTitle.setAttribute("id", "modalLabel")
+                modalIframeTitle.innerHTML = cardTitle.innerHTML
+                modalIframeHeader.appendChild(modalIframeTitle)
 
                 const modalCloseButton = document.createElement("btn")
                 modalCloseButton.setAttribute("type", "button")
                 modalCloseButton.setAttribute("class", "close")
-                /*modalCloseButton.setAttribute("data-dismiss", "modal")
-                modalCloseButton.setAttribute("aria-label", "Close")*/
-                modalHeader.appendChild(modalCloseButton)
+                modalIframeHeader.appendChild(modalCloseButton)
 
                 const modalCloseButtonSpan = document.createElement("span")
                 modalCloseButtonSpan.setAttribute("aria-hidden", "true")
@@ -188,22 +194,17 @@ const createCards = () => {
                 modalCloseButtonSpan.innerHTML = "x"
                 modalCloseButton.appendChild(modalCloseButtonSpan)
 
-                const modalBody = document.createElement("div")
-                modalBody.setAttribute("class", "modal-body")
-                modalContent.appendChild(modalBody)
-                modalBody.appendChild(modalHeader)
+                const modalBodyIframe = document.createElement("div")
+                modalBodyIframe.setAttribute("class", "modal-body-iframe")
+                modalContent.appendChild(modalBodyIframe)
+                modalBodyIframe.appendChild(modalIframeHeader)
 
                 modalCloseButton.addEventListener("click", closeModal)
 
                     const modalIframe = document.createElement("iframe")
                     modalIframe.setAttribute("src", data[i].url)
-                    modalIframe.setAttribute("allowfullscreen", "true")
-                    modalIframe.setAttribute("scrolling", "false")
-                    modalIframe.setAttribute("frameborder", "0")
-                    modalIframe.setAttribute("framespacing", "0")
-                    modalIframe.setAttribute("class", "airtable-embed embed-responsive-16by9")
-                    /*modalIframe.removeAttribute("class", "ytp-cued-thumbnail-overlay")*/
-                    modalBody.appendChild(modalIframe)
+                    modalIframe.setAttribute("class", "airtable-embed")
+                    modalBodyIframe.appendChild(modalIframe)
                 
                 function closeModal () {
                     modalImages.style.display = "none"
@@ -216,7 +217,7 @@ const createCards = () => {
 
 }
 
-createCards()
+/*createCards()*/
 
 
 /*
