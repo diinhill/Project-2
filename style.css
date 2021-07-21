@@ -1,8 +1,4 @@
-body {
-    margin: 0;
-    background: #000; 
-  }
-video { 
+.video-container { 
       position: fixed;
       top: 50%;
       left: 50%;
@@ -16,29 +12,128 @@ video {
       background-size: cover;
       transition: 1s opacity;
   }
-  .stopfade { 
+.stopfade { 
      opacity: .5;
-  }
-  .input-group {
-      display: grid;
-      width: 50%;
-      margin: auto;
-  }
-  label {
-      font-family: 'Play', sans-serif; 
-      color: rgba(244, 245, 255, 0.911);
-      margin-left: 40%;
-      margin-bottom: 1em;
-  }
-.mb-1 {
-    visibility: hidden;
 }
 
+.ufo {
+    z-index: 9999;
+    position: absolute;
+    display: flex;
+    top: 37%;
+    left: 43%;
+    animation: ufo 5s ease-in-out 0s infinite alternate none running;
+    cursor: pointer;
+}
+@keyframes ufo {
+    0%   {  
+        transform: translateX(0px) rotate(0deg) translateY(0px) scale(100%);
+    }
+    25% {
+        transform: translateX(10px) rotate(10deg) translateY(10px);
+
+    }
+    50% {  
+        transform: translateX(0px) rotate(0deg) translateY(0px);
+
+    }
+    100% {  
+        transform: translateX(-10px) rotate(-10deg) translateY(-10px) scale(50%);
+    }
+  }
+  .warp {
+    z-index: 9999;
+    position: absolute;
+    display: flex;
+    top: 37%;
+    left: 43%;
+    animation: warp 6s ease-in 0s 1 normal forwards running;
+  }
+  @keyframes warp {
+    0%   {  
+        transform: translateX(0px) rotate(0deg) translateY(0px) translateZ(9999) scale(100%);
+    }
+    25% {
+        transform: translateX(10px) rotate(10deg) translateY(10px) translateZ(6000);
+
+    }
+    50% {  
+        transform: translateX(0px) rotate(0deg) translateY(0px) translateZ(3000);
+
+    }
+    100% {  
+        transform: translateX(-10px) rotate(-10deg) translateY(-10px) translateZ(0) scale(0%);
+    }
+  }
+  .smallUfo {
+    cursor: pointer;
+    z-index: 9999;
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 6rem;
+    animation: smallUfo 5s ease-in-out 0s infinite alternate none running;
+}
+@keyframes smallUfo {
+    0%   {  
+        transform: translateX(0px) rotate(0deg) translateY(0px) scale(100%);
+    }
+    25% {
+        transform: translateX(10px) rotate(10deg) translateY(10px);
+
+    }
+    50% {  
+        transform: translateX(0px) rotate(0deg) translateY(0px);
+
+    }
+    100% {  
+        transform: translateX(-10px) rotate(-10deg) translateY(-10px) scale(50%);
+    }
+  }
 
 
-
-
-
+.row {
+    margin-top: 5rem;
+}
+.search-container {
+    z-index: 10000;
+    display: none;
+    position: fixed;
+    width: 20%;
+    animation-duration: search-container 3s;
+}
+.input-group {
+    z-index: 10000;
+    display: grid;
+    width: 50%;
+    letter-spacing: 1em;
+    top: 8%;  
+}
+label {
+    z-index: 10000;
+    font-family: 'Alenia Regular', sans-serif; 
+    color: rgba(244, 245, 255, 0.911);
+    margin-left: 18%;
+    margin-bottom: 1em;
+}
+.searchButton {
+    z-index: 10000;
+    margin-top: 1em;
+    justify-self: right;
+}
+.header-container {
+    z-index: -100;
+    font-family: 'Alenia Regular', sans-serif;
+    color: rgba(244, 245, 255, 0.911);
+    position: fixed;
+    top: 2rem;
+    left: 2rem; 
+    display: none;
+}
+@keyframes search-container {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
 
 
 
@@ -217,4 +312,27 @@ video {
     color: rgba(43, 49, 83, 0.925); 
 }
 
+canvas{ 
+    display: block;
+     vertical-align: bottom;
 
+    } /* ---- particles.js container ---- */
+     #particles-js{
+          position:absolute;
+          top:0px;
+          left: 0px;
+         width: 100%;
+          height: 100%; 
+        
+        } /* ---- stats.js ---- */ 
+        
+        .count-particles{
+             background: #000022;
+              position: absolute;
+              top: 48px; left: 0; 
+              width: 80px; color: #13E8E9; 
+              font-size: .8em; text-align: left; text-indent: 4px;
+               line-height: 14px;
+               padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; }
+               
+               .js-count-particles{ font-size: 1.1em; } #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }

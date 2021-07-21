@@ -1,18 +1,38 @@
-console.log('data', data)
 
+const url = "https://apodapi.herokuapp.com/api/?start_date=2018-10-05&end_date=2018-12-10&thumbs=true&image_thumbnail_size=480&image_thumbnail_size=240"
+let data
 
-/*why is this not working?
-const headerFrontP = document.getElementsByClassName("mb-1")
-headerFrontP.style.visibility = "hidden"*/
+const starryBgLoop = document.getElementById("starryBgLoop")
+console.log(starryBgLoop.playbackRate)
+const searchContainer = document.getElementById("searchContainer")
+const particlesJs = document.getElementById("particles-js")
+const headerDataPage = document.getElementById("headerDataPage")
+const row = document.getElementById("row")
+const popUpImages = document.getElementById("popUpImages")
+const ufo = document.getElementById("ufo")
+const ufoImage = document.getElementById("ufoImage")
+ufoImage.addEventListener("click", warp) 
+// const searchButton = document.getElementById("searchButton")
+// searchButton.addEventListener("click", getData)
 
-const searchBar = document.getElementById("searchBar")
+function getData() {
+    fetch(url).then(response => {
+        console.log("response", response)
+        return response.json()
+    }).then(dataApi => {
+        document.getElementById("loader").style.display = "none"
+        console.log("dataApi", dataApi)
+        data = dataApi
+        console.log("data", data.length)
+        createCards()
+    })
+} 
 
-
-const createCards = () => {
-    const row = document.getElementById("row")
-    const popUpImages = document.getElementById("popUpImages")
+function createCards() {
+    particlesJs.style.display = "none"
+    // searchContainer.style.display = "none"
+    // ufo.style.display = "none"
     
-
     for (let i = 0; i < data.length; i++) {
 
         const col = document.createElement("div")
@@ -53,7 +73,7 @@ const createCards = () => {
             const cardImage = document.createElement("img")
             cardImage.setAttribute("src", data[i].url)
             cardImage.setAttribute("class", "card-img embed-responsive-item position-absolute")
-            console.log(cardImage)
+            // (cardImage)
             card.appendChild(cardImage)
             card.addEventListener("click", imageEnlarge)
         }
@@ -61,7 +81,7 @@ const createCards = () => {
             const cardIframe = document.createElement("iframe")
             cardIframe.setAttribute("src", data[i].url)
             cardIframe.setAttribute("class", "card-iframe embed-responsive-item position-absolute")
-            console.log(cardIframe)
+            // (cardIframe)
             card.appendChild(cardIframe)
             card.addEventListener("click", videoEnlarge)
         }
@@ -73,7 +93,7 @@ const createCards = () => {
             cardLink.setAttribute("target", "blank")
             cardLink.setAttribute("href", data[i].apod_site)
             cardLink.append(cardTitle)
-            console.log(cardLink)
+            // (cardLink)
             card.appendChild(cardImage)
             cardBody.appendChild(cardLink)
         }  
@@ -207,41 +227,22 @@ const createCards = () => {
                 function closeModal () {
                     modalImages.style.display = "none"
                 }
-        
-            }
-         
-        
+            }  
     }
-
 }
 
-createCards()
 
 
-/*
-function squareCropImage (url) {
-    const outputImageAspectRatio = 1
-    const inputImage = new Image()
-    inputImage.src = url
-    inputImage.onload = () => {
-        const inputWidth = inputImage.naturalWidth
-        const inputHeight = inputImage.naturalHeight
-        const inputImageAspectRatio = inputWidth / inputHeight
-        let outputWidth = inputWidth
-        let outputHeight = inputHeight
-        if (inputImageAspectRatio > outputImageAspectRatio) {
-            outputWidth = inputHeight * outputImageAspectRatio
-        } else if (inputImageAspectRatio < outputImageAspectRatio) {
-            outputHeight = inputWidth / outputImageAspectRatio
-        }
-        const outputImage = document.createElement("canvas")
-        outputImage.width = outputWidth
-        outputImage.height = outputHeight
-        const ctx = outputImage.getContext("2d")
-        ctx.drawImage(inputImage, 0, 0)
-        document.body.appendChild(inputImage)
-        document.body.appendChild(outputImage)
-    }
-    
-}    squareCropImage (td3[i])
-*/
+function warp() {
+    starryBgLoop.playbackRate = 10
+    ufo.classList.replace("ufo", "warp")
+
+    function smallUfo() {
+    ufoImage.style.width = "100px"
+    ufo.classList.replace("warp", "smallUfo")
+    headerDataPage.style.display = "block"
+    searchContainer.style.display = "block"
+    starryBgLoop.playbackRate = 1
+    } 
+    setTimeout(smallUfo, 6000)
+}

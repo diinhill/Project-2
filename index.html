@@ -5,50 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>space images</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet"> 
-    <link href="./bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet"/> 
+    <link href="https://www.1001fonts.com/alenia-font.html" rel="stylesheet"/> 
+    <link href="./bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style.css"><link>
+      <!-- <link href="./Alien_font/AlienPlanet-4aOl.ttf" rel="stylesheet"> -->
 </head>
 
 <body>    
-    <div class="video-container">
+    <div id="bgVideo" class="video-container">
         <video id="starryBgLoop" controls preload="true" autoplay loop muted>
             <source src="images/foo.mp4" type="video/mp4"> 
-            <!-- <source src="images/starrySkyLoop.ogv" type="video/ogv">    
-            <source src="images/starrySkyLoop.webm" type="video/webm">  -->
-         </video>
+        </video>
          <!-- <div id="bgImages" class="bg-image-container">
             <img src="images/starryNight.jpg" alt="">
-        </div> --> -->
+         --> -->
+    </div>
+        
+    <div id="ufo" class="ufo">
+        <img id="ufoImage" src="https://www.freepnglogos.com/uploads/ufo-png/ufo-spaceship-flying-saucer-transparent-png-stickpng-14.png" width="200" alt="ufo spaceship flying saucer transparent png stickpng" />
     </div>
 
-    <div id="headerFrontP" class="container">
-        <h1 class="mb-1">latest pics from outer space</h1>
-    </div>    
+    <div id="headerDataPage" class="header-container">
+        <h1>S</h1>
+        <h1>P</h1>
+        <h1>A</h1>
+        <h1>C</h1>
+        <h1>E</h1>
+        <h1>O</h1>
+        <h1>D</h1>
+        <h1>Y</h1>
+        <h1>S</h1>
+        <h1>S</h1>
+        <h1>E</h1>
+        <h1>Y</h1>
+    </div>   
 
-    <div id="searchContainer" class="container">
-        <div id="searchBar" class="input-group">
-            <label for="site-search">search for images</label>
-            <input type="search" id="site-search" name="site-search"
-            aria-label="search for images">
-        <div class="overlay"></div>
-        </div>
-    </div>
+    <h5 id="loader">LOADING</h5>
     
     <div id="popUpImages" class="container"></div>
 
-
     <div id="row-container" class="container">
+        <div id="searchContainer" class="search-container">
+            <!-- <div id="searchBar" class="input-group">
+                <label for="site-search">SEARCH FOR IMAGES</label>
+                <input type="search" id="site-search" name="site-search"
+                aria-label="search for images">
+                <div id="searchButton" class="searchButton">
+                    <button onclick="getData()">SHOW RESULTS</button>
+                </div>
+            <div class="overlay"></div></div> -->
+            <select class="form-select" aria-label="Default select example">
+                <option selected>SELECT MEDIA TYPE</option>
+                <option value="1">SELECT ALL</option>
+                <hr class="dropdown-divider">
+                <option value="2">PICTURES</option>
+                <option value="3">VIDEOS</option>
+                <option value="3">ELSE</option>
+            </select>
+            <div id="searchButton" class="searchButton">
+                <button onclick="getData()">SHOW RESULTS</button>
+            </div>
+        </div>
         <div id="row" class="row">
         </div>
     </div>
 
-    
-    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="response.js"></script>
+<!-- particles.js container --> <div id="particles-js"></div> <!-- stats - count particles -->  <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> 
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+    <script src="particle.js" ></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+    <!-- <script src="response.js"></script> -->
     <script src="main.js"></script>
 </body>
 </html>
