@@ -1,7 +1,5 @@
 console.log('data', data)
 
-/*const bgImages = document.getElementById("bgImages")
-bgImages.style.position = "relative"*/
 
 /*why is this not working?
 const headerFrontP = document.getElementsByClassName("mb-1")
