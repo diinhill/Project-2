@@ -116,20 +116,19 @@
     letter-spacing: 1em;
     top: 8%;  
 } */
-label {
+.form-check-label {
     z-index: 10000;
     font-family: 'Alenia Regular', sans-serif; 
     color: rgba(244, 245, 255, 0.911);
     margin-top: .5em;
     margin-bottom: .5em;
 }
-.wrapper {
-    display: grid;
-    border: 1px solid lightgrey;
-    padding: 4px;
+.form-check-input {
+    margin-top: .7em;
 }
-input {
-    border: 0;
+.form-check-input:checked {
+    background-color: #07101d;
+    border-color: #ced4da;
 }
 .searchButton {
     display: flex;
