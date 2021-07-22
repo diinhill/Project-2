@@ -93,33 +93,56 @@
 
 
 .row {
-    margin-top: 5rem;
+    margin-top: 19rem;
 }
 .search-container {
     z-index: 10000;
     display: none;
     position: fixed;
-    width: 20%;
+    border: 1px solid lightgrey;
+    padding: 4px;
+    width: 18rem;
+    top: 3rem;
     animation-duration: search-container 3s;
 }
-.input-group {
+.form-select {
+    display: inline;
+    border-radius: unset;
+}
+/* .input-group {
     z-index: 10000;
     display: grid;
     width: 50%;
     letter-spacing: 1em;
     top: 8%;  
-}
+} */
 label {
     z-index: 10000;
     font-family: 'Alenia Regular', sans-serif; 
     color: rgba(244, 245, 255, 0.911);
-    margin-left: 18%;
-    margin-bottom: 1em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+.wrapper {
+    display: grid;
+    border: 1px solid lightgrey;
+    padding: 4px;
+}
+input {
+    border: 0;
 }
 .searchButton {
+    display: flex;
     z-index: 10000;
-    margin-top: 1em;
-    justify-self: right;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+}
+button {
+    background-color: #fff;
+    border: none;
+    display: flex;
+    padding: .375rem 2.25rem .375rem .75rem;
+    margin-left: 4.3rem;
 }
 .header-container {
     z-index: -100;
@@ -152,27 +175,26 @@ label {
 .card {
     width: 18rem;
     height: 18rem; 
-    border: 0.11rem solid  rgba(109, 109, 139, 0.808);
+    border: unset;
     margin-bottom: 2rem;
-    box-shadow: 0.15rem 0.15rem 0.4rem 0.1rem rgb(157, 159, 167);
 }
 .card-img {
     width: 100%;
     height: 18rem;
     object-fit: cover;
+    border: 0.11rem solid  rgba(109, 109, 139, 0.808);
 }
 .card-iframe {
     width: 100%;
     height: 18rem;
     object-fit: cover;
+    border: 0.11rem solid  rgba(109, 109, 139, 0.808);
 }
 .card-body {
     width: 18rem;
     height: 18rem;
     visibility: hidden;
     z-index: 100;
-    background-color: rgba(10, 28, 90, 0.397);
-
     transition: width 0.1s, height 0.1s;
     transition-timing-function: ease-in-out;
 }
@@ -181,9 +203,9 @@ label {
     height: 18.5rem;
     justify-self: center;
     align-self: center;
-    margin-top: -0.25rem;
-    background-color: rgba(10, 27, 90, 0.781);
-    border: 0.11rem solid  rgba(109, 109, 139, 0.808);
+    margin-top: -0.28rem;
+    margin-left: -0.33rem;
+    background-color: rgba(2, 7, 20, 0.781);
     box-shadow: 0.15rem 0.15rem 0.4rem 0.1rem rgb(96, 99, 114);
     border-radius: .25rem;
     color: rgba(244, 245, 255, 0.911);
@@ -192,7 +214,7 @@ label {
     font-size: 2em;
     padding-left: 1.5em;
     padding-right: 0.35em;
-    margin-bottom: 2em;
+    top: 0.2em;
     color: rgba(244, 245, 255, 0.911);
     text-align: right;
     font-family: 'Play', sans-serif;    
@@ -201,19 +223,19 @@ label {
     color: rgba(244, 245, 255, 0.911);
 }
 .card-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.8em;
 }
 .blockquote {
-    font-size: 0.6rem;
+    font-size: 0.6em;
+    padding-right: 0.8em;
 }
 .card-link {
-    font-size: 2rem;
-    padding-right: 0rem;
-    padding-bottom: 2rem;
-    padding-left: 4rem;
-    text-align: right;
+    padding-left: 1.5em;
+    padding-right: 0.35em;
+    margin-bottom: 2em;
     color: rgba(244, 245, 255, 0.911);
-    font-family: 'Play', sans-serif;
+    text-align: right;
+    font-family: 'Play', sans-serif;    
 }
 
 .modal {

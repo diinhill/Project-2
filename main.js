@@ -12,26 +12,20 @@ const popUpImages = document.getElementById("popUpImages")
 const ufo = document.getElementById("ufo")
 const ufoImage = document.getElementById("ufoImage")
 ufoImage.addEventListener("click", warp) 
-// const searchButton = document.getElementById("searchButton")
-// searchButton.addEventListener("click", getData)
 
-function getData() {
-    fetch(url).then(response => {
-        console.log("response", response)
-        return response.json()
-    }).then(dataApi => {
-        document.getElementById("loader").style.display = "none"
-        console.log("dataApi", dataApi)
-        data = dataApi
-        console.log("data", data.length)
-        createCards()
-    })
+
+async function getData() {
+    const response = await fetch(url)
+    console.log("response", response)
+    data = await response.json()
+    console.log("data", data)
+
+    createCards()
+
+    return data
 } 
 
 function createCards() {
-    particlesJs.style.display = "none"
-    // searchContainer.style.display = "none"
-    // ufo.style.display = "none"
     
     for (let i = 0; i < data.length; i++) {
 
@@ -55,8 +49,6 @@ function createCards() {
         const cardButton = document.createElement("btn")
             cardButton.setAttribute("class", "btn")
             cardButton.setAttribute("type", "button")
-            /*cardButton.setAttribute("data-toggle", "modal")
-            cardButton.setAttribute("data-target", ".modal fade")*/
             cardButton.append(cardTitle)
             cardBody.appendChild(cardButton)
 
@@ -73,7 +65,6 @@ function createCards() {
             const cardImage = document.createElement("img")
             cardImage.setAttribute("src", data[i].url)
             cardImage.setAttribute("class", "card-img embed-responsive-item position-absolute")
-            // (cardImage)
             card.appendChild(cardImage)
             card.addEventListener("click", imageEnlarge)
         }
@@ -81,7 +72,6 @@ function createCards() {
             const cardIframe = document.createElement("iframe")
             cardIframe.setAttribute("src", data[i].url)
             cardIframe.setAttribute("class", "card-iframe embed-responsive-item position-absolute")
-            // (cardIframe)
             card.appendChild(cardIframe)
             card.addEventListener("click", videoEnlarge)
         }
@@ -89,11 +79,10 @@ function createCards() {
             const cardImage = document.createElement("img")
             cardImage.setAttribute("class", "card-img")
             const cardLink = document.createElement("a")
-            cardLink.setAttribute("class", "card-link text-white position-absolute")
+            cardLink.setAttribute("class", "card-link")
             cardLink.setAttribute("target", "blank")
             cardLink.setAttribute("href", data[i].apod_site)
             cardLink.append(cardTitle)
-            // (cardLink)
             card.appendChild(cardImage)
             cardBody.appendChild(cardLink)
         }  
@@ -238,11 +227,32 @@ function warp() {
     ufo.classList.replace("ufo", "warp")
 
     function smallUfo() {
-    ufoImage.style.width = "100px"
+    // ufoImage.style.width = "100px"
+    ufo.style.display = "none"
     ufo.classList.replace("warp", "smallUfo")
     headerDataPage.style.display = "block"
-    searchContainer.style.display = "block"
+    searchContainer.style.display = "grid"
     starryBgLoop.playbackRate = 1
+    particlesJs.style.display = "none"
     } 
     setTimeout(smallUfo, 6000)
 }
+
+$(function() {
+    $("#from").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onClose: function(selectedDate) {
+            $("to").datepicker("option", "minDate", selectedDate)
+        }
+    })
+    $("#to").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onClose: function(selectedDate) {
+            $("from").datepicker("option", "maxDate", selectedDate)
+        }
+    })
+})
