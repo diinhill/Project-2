@@ -6,8 +6,6 @@ console.log(starryBgLoop.playbackRate)
 const searchContainer = document.getElementById("searchContainer")
 const particlesJs = document.getElementById("particles-js")
 const headerDataPage = document.getElementById("headerDataPage")
-const row = document.getElementById("row")
-const popUpImages = document.getElementById("popUpImages")
 const ufo = document.getElementById("ufo")
 const ufoImage = document.getElementById("ufoImage")
 ufoImage.addEventListener("click", warp) 
@@ -27,7 +25,8 @@ async function controller() {
     console.log("dataList", dataList)
 
     createDropdownMenu(dataList)
-    createCards(dataList)
+    createCheckboxMenu(dataList)
+    searchContainerEventListeners(dataList)
 }
 controller()
 
@@ -45,9 +44,48 @@ const createDropdownMenu = (list) => {
     })
 }
 
-function createCards() {
+const createCheckboxMenu = (list) => {
+    const checkboxMenu = document.getElementById("checkboxMenu")
+    const dates = list.map(e => e.date)
+    console.log("dates", dates)
+    let months = []
+    dates.forEach(date => {
+        let month = new Date(date).getMonth() + 1
+        // month.toLocaleString('en-us', { month: 'long' })
+        console.log("month", month)
+        months.push(month)
+    }) 
+    console.log("months", months)
+    const uniqueMonths = [... new Set(months)]
+    console.log("uniqueMonths", uniqueMonths)
+
+
+
+}
+
+const searchContainerEventListeners = (list) => {
+    document.getElementById("dropdownMenu")
+        .addEventListener("change", (event) => {
+            filterByDropdownMenu(list)
+        })
+}
+
+const filterByDropdownMenu = (list) => {
+    const dropdownMenuValue = document.getElementById("dropdownMenu").value
+    console.log("dropdownMenuValue", dropdownMenuValue)
+    const filteredList = list.filter(listItem => {
+        return listItem.media_type === dropdownMenuValue || dropdownMenuValue === "all"
+    })
+    createCards(filteredList)
+}
+
+const createCards = (list) => {
+
+    let row = document.getElementById("row")
+    let popUpImages = document.getElementById("popUpImages")
+    row.innerHTML = ""
     
-    for (let i = 0; i < data.length; i++) {
+    list.forEach(listItem => {
 
         const col = document.createElement("div")
             col.setAttribute("class", "col-sm-12 col-md-6 col-lg-4")
@@ -62,7 +100,7 @@ function createCards() {
             card.appendChild(cardBody)
 
         const cardTitle = document.createElement("div")
-            cardTitle.innerHTML = data[i].title
+            cardTitle.innerHTML = listItem.title
             cardTitle.setAttribute("class", "card-title position-absolute")
             cardBody.appendChild(cardTitle)
 
@@ -77,31 +115,31 @@ function createCards() {
             cardBody.appendChild(cardDate)
 
         const cardCopyright = document.createElement("div")
-            cardCopyright.innerHTML = data[i].date + " by:<br>" + data[i].copyright
+            cardCopyright.innerHTML = listItem.date + " by:<br>" + listItem.copyright
             cardCopyright.setAttribute("class", "blockquote position-absolute bottom-0 start-98")
             cardBody.appendChild(cardCopyright) 
 
-        if (data[i].media_type == "image") {
+        if (listItem.media_type == "image") {
             const cardImage = document.createElement("img")
-            cardImage.setAttribute("src", data[i].url)
+            cardImage.setAttribute("src", listItem.url)
             cardImage.setAttribute("class", "card-img embed-responsive-item position-absolute")
             card.appendChild(cardImage)
             card.addEventListener("click", imageEnlarge)
         }
-        else if (data[i].media_type == "video") {   
+        else if (listItem.media_type == "video") {   
             const cardIframe = document.createElement("iframe")
-            cardIframe.setAttribute("src", data[i].url)
+            cardIframe.setAttribute("src", listItem.url)
             cardIframe.setAttribute("class", "card-iframe embed-responsive-item position-absolute")
             card.appendChild(cardIframe)
             card.addEventListener("click", videoEnlarge)
         }
-        if (data[i].media_type == "other") {   
+        if (listItem.media_type == "other") {   
             const cardImage = document.createElement("img")
             cardImage.setAttribute("class", "card-img")
             const cardLink = document.createElement("a")
             cardLink.setAttribute("class", "card-link")
             cardLink.setAttribute("target", "blank")
-            cardLink.setAttribute("href", data[i].apod_site)
+            cardLink.setAttribute("href", listItem.apod_site)
             cardLink.append(cardTitle)
             card.appendChild(cardImage)
             cardBody.appendChild(cardLink)
@@ -173,7 +211,7 @@ function createCards() {
                 }*/
 
                     const modalImage = document.createElement("img")
-                    modalImage.setAttribute("src", data[i].url)
+                    modalImage.setAttribute("src", listItem.url)
                     modalImage.setAttribute("class", "modal-image")
                     modalBody.appendChild(modalImage)
 
@@ -229,7 +267,7 @@ function createCards() {
                 modalCloseButton.addEventListener("click", closeModal)
 
                     const modalIframe = document.createElement("iframe")
-                    modalIframe.setAttribute("src", data[i].url)
+                    modalIframe.setAttribute("src", listItem.url)
                     modalIframe.setAttribute("class", "airtable-embed")
                     modalBodyIframe.appendChild(modalIframe)
                 
@@ -237,7 +275,7 @@ function createCards() {
                     modalImages.style.display = "none"
                 }
             }  
-    }
+    })
 }
 
 
