@@ -1,6 +1,5 @@
 
 const url = "https://apodapi.herokuapp.com/api/?start_date=2018-10-05&end_date=2018-12-10&thumbs=true&image_thumbnail_size=480&image_thumbnail_size=240"
-let data
 
 const starryBgLoop = document.getElementById("starryBgLoop")
 console.log(starryBgLoop.playbackRate)
@@ -14,16 +13,37 @@ const ufoImage = document.getElementById("ufoImage")
 ufoImage.addEventListener("click", warp) 
 
 
-async function getData() {
+const getData = async () => {
     const response = await fetch(url)
     console.log("response", response)
-    data = await response.json()
+    const data = await response.json()
     console.log("data", data)
-
-    createCards()
 
     return data
 } 
+
+async function controller() {
+    const dataList = await getData()
+    console.log("dataList", dataList)
+
+    createDropdownMenu(dataList)
+    createCards(dataList)
+}
+controller()
+
+const createDropdownMenu = (list) => {
+    const dropdownMenu = document.getElementById("dropdownMenu")
+    const mediaTypes = list.map(e => e.media_type)
+    console.log("mediaTypes", mediaTypes)
+    const uniqueMediaTypes = [... new Set(mediaTypes)]
+    console.log("uniqueMediaTypes", uniqueMediaTypes)
+    uniqueMediaTypes.forEach(mediaType => {
+        let option = document.createElement("option")
+        option.innerHTML = mediaType
+        option.value = mediaType
+        dropdownMenu.appendChild(option)
+    })
+}
 
 function createCards() {
     
