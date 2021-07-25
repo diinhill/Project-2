@@ -25,6 +25,7 @@ async function controller() {
     console.log("dataList", dataList)
 
     createDropdownMenu(dataList)
+    createMonths(dataList)
     createCheckboxMenu(dataList)
     searchContainerEventListeners(dataList)
 }
@@ -43,30 +44,53 @@ const createDropdownMenu = (list) => {
         dropdownMenu.appendChild(option)
     })
 }
+const months = []
+let month 
+const createMonths = (list) => {
+    const dates = list.map(e => e.date)
+    console.log("dates", dates)
+    dates.forEach(date => {
+        month = new Date(date).toLocaleString('en-us', { month: 'long' })
+        console.log("month", month)
+        months.push(month)
+
+    }) 
+    console.log("months", months)
+}
 
 const createCheckboxMenu = (list) => {
     const checkboxMenu = document.getElementById("checkboxMenu")
-    const dates = list.map(e => e.date)
-    console.log("dates", dates)
-    let months = []
-    dates.forEach(date => {
-        let month = new Date(date).getMonth() + 1
-        // month.toLocaleString('en-us', { month: 'long' })
-        console.log("month", month)
-        months.push(month)
-    }) 
-    console.log("months", months)
+   
     const uniqueMonths = [... new Set(months)]
     console.log("uniqueMonths", uniqueMonths)
-
-
-
+    uniqueMonths.forEach(month => {
+        const monthWrapper = document.createElement("div")
+        monthWrapper.className = "form-check"
+        monthWrapper.id = "monthWrapper"
+        let input = document.createElement("input")
+        input.id = "inputId"
+        input.type = "checkbox"
+        input.className = "form-check-input"
+        input.name = "month"
+        input.value = month
+        console.log("month", month)
+        let label = document.createElement("label")
+        label.innerHTML = month
+        label.className ="form-check-label text-white"
+        monthWrapper.appendChild(input)
+        monthWrapper.appendChild(label)
+        checkboxMenu.appendChild(monthWrapper)
+    })
 }
 
 const searchContainerEventListeners = (list) => {
     document.getElementById("dropdownMenu")
         .addEventListener("change", (event) => {
             filterByDropdownMenu(list)
+        })
+    document.getElementById("checkboxMenu")
+        .addEventListener("click", (event) => {
+            filterByCheckboxMenu(list)
         })
 }
 
@@ -75,6 +99,51 @@ const filterByDropdownMenu = (list) => {
     console.log("dropdownMenuValue", dropdownMenuValue)
     const filteredList = list.filter(listItem => {
         return listItem.media_type === dropdownMenuValue || dropdownMenuValue === "all"
+    })
+    createCards(filteredList)
+}
+
+const filterByCheckboxMenu = (list) => {
+    const inputClass = document.getElementsByTagName("input")
+    console.log("inputClass", inputClass)
+
+    let inputValue
+    let inputClassArray
+    Array.from(inputClass).forEach(htmlCollectItem => {
+        console.log("htmlCollectItem", htmlCollectItem)
+        inputValue = htmlCollectItem.value
+        console.log("inputValue", inputValue)
+        console.log("typeof inputValue", typeof inputValue)
+        if (htmlCollectItem.checked === true) {
+            inputClassArray = htmlCollectItem.checked
+            console.log("inputClassArray", inputClassArray)
+        } return false
+    })
+
+    let monthValue
+    let newArrayList = []
+    newArrayList = list
+    newArrayList.forEach((item, i, months) => {
+        let newArrayList = {}
+        newArrayList = item
+        monthValue = month
+        console.log("monthValue", monthValue)
+        console.log("typeof monthValue", typeof monthValue)
+        const valueArrayList = Object.assign(newArrayList, {value: monthValue})
+            console.log("valueArrayList", valueArrayList)
+        })
+    Array.from(newArrayList).forEach(htmlCollectItem => {
+        console.log("htmlCollectItem", htmlCollectItem)
+    })
+
+    
+    const filteredList = list.filter((item, i) => {
+        console.log("typeof item", typeof item)
+      
+
+        
+        console.log("typeof item.value", typeof item.value)
+        return item.value === inputValue && inputClassArray === true
     })
     createCards(filteredList)
 }
