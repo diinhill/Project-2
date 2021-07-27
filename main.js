@@ -26,8 +26,10 @@ async function controller() {
 
     createDropdownMenu(dataList)
     createMonths(dataList)
+    createNewMonths(months)
+    createDataListWithMonths(dataList)
     createCheckboxMenu(dataList)
-    searchContainerEventListeners(dataList)
+    searchContainerEventListeners(newDataList)
 }
 controller()
 
@@ -44,18 +46,35 @@ const createDropdownMenu = (list) => {
         dropdownMenu.appendChild(option)
     })
 }
+
 const months = []
-let month 
 const createMonths = (list) => {
     const dates = list.map(e => e.date)
     console.log("dates", dates)
     dates.forEach(date => {
-        month = new Date(date).toLocaleString('en-us', { month: 'long' })
+        let month = new Date(date).toLocaleString('en-us', { month: 'long' })
         console.log("month", month)
         months.push(month)
-
     }) 
     console.log("months", months)
+}
+
+const newMonths = []
+const createNewMonths = (months) => {
+    months.forEach(month => {
+        let newMonth = {value: month}
+        newMonths.push(newMonth)
+    })
+    console.log("newMonths", newMonths)
+}
+
+const newDataList = []
+const createDataListWithMonths = (list) => {
+    for (let i = 0; i < list.length; i++) {
+        let newItem = Object.assign(list[i], newMonths[i])
+        newDataList.push(newItem)
+    }
+    console.log("newDataList", newDataList)
 }
 
 const createCheckboxMenu = (list) => {
@@ -86,64 +105,42 @@ const createCheckboxMenu = (list) => {
 const searchContainerEventListeners = (list) => {
     document.getElementById("dropdownMenu")
         .addEventListener("change", (event) => {
-            filterByDropdownMenu(list)
+            filterByMenu(list)
         })
     document.getElementById("checkboxMenu")
-        .addEventListener("click", (event) => {
-            filterByCheckboxMenu(list)
+        .addEventListener("change", (event) => {
+            filterByMenu(list)
         })
 }
 
-const filterByDropdownMenu = (list) => {
+const filterByMenu = (list) => {
     const dropdownMenuValue = document.getElementById("dropdownMenu").value
     console.log("dropdownMenuValue", dropdownMenuValue)
-    const filteredList = list.filter(listItem => {
-        return listItem.media_type === dropdownMenuValue || dropdownMenuValue === "all"
-    })
-    createCards(filteredList)
-}
 
-const filterByCheckboxMenu = (list) => {
-    const inputClass = document.getElementsByTagName("input")
-    console.log("inputClass", inputClass)
-
-    let inputValue
-    let inputClassArray
-    Array.from(inputClass).forEach(htmlCollectItem => {
-        console.log("htmlCollectItem", htmlCollectItem)
-        inputValue = htmlCollectItem.value
-        console.log("inputValue", inputValue)
-        console.log("typeof inputValue", typeof inputValue)
-        if (htmlCollectItem.checked === true) {
-            inputClassArray = htmlCollectItem.checked
-            console.log("inputClassArray", inputClassArray)
-        } return false
-    })
-
-    let monthValue
-    let newArrayList = []
-    newArrayList = list
-    newArrayList.forEach((item, i, months) => {
-        let newArrayList = {}
-        newArrayList = item
-        monthValue = month
-        console.log("monthValue", monthValue)
-        console.log("typeof monthValue", typeof monthValue)
-        const valueArrayList = Object.assign(newArrayList, {value: monthValue})
-            console.log("valueArrayList", valueArrayList)
+    const htmlCollection = document.getElementsByTagName("input")
+    console.log("htmlCollection", htmlCollection)
+    const inputItems = Array.from(htmlCollection)
+    console.log("inputItems", inputItems)
+ 
+    let inputChecked = []
+        inputItems.forEach(inputItem => {
+            console.log("inputItem", inputItem)
+            console.log("inputItem.value", inputItem.value)
+            console.log("typeof inputItem.value", typeof inputItem.value)
+            if (inputItem.checked === true) {
+                inputChecked.push(inputItem.value)
+            } return inputChecked
         })
-    Array.from(newArrayList).forEach(htmlCollectItem => {
-        console.log("htmlCollectItem", htmlCollectItem)
-    })
-
     
-    const filteredList = list.filter((item, i) => {
-        console.log("typeof item", typeof item)
-      
-
-        
-        console.log("typeof item.value", typeof item.value)
-        return item.value === inputValue && inputClassArray === true
+    console.log("inputChecked", inputChecked)
+    console.log("inputChecked.value", inputChecked.value)
+   
+    const filteredList = list.filter(listItem => {
+        for (let i = 0; i < inputChecked.length; i++) {
+            if (listItem.value === inputChecked[i]) {
+                return listItem.media_type === dropdownMenuValue || dropdownMenuValue === "all" 
+            }
+        }
     })
     createCards(filteredList)
 }
@@ -202,7 +199,7 @@ const createCards = (list) => {
             card.appendChild(cardIframe)
             card.addEventListener("click", videoEnlarge)
         }
-        if (listItem.media_type == "other") {   
+        else  {   
             const cardImage = document.createElement("img")
             cardImage.setAttribute("class", "card-img")
             const cardLink = document.createElement("a")
@@ -229,7 +226,6 @@ const createCards = (list) => {
            function imageEnlarge() {
                 const modalImages = document.createElement("div")
                 modalImages.setAttribute("class", "modal")
-                /*modalImages.setAttribute("tabindex", "-1") */
                 modalImages.setAttribute("role", "dialog")
                 modalImages.setAttribute("aria-labelledby", "modalLabel")
                 modalImages.setAttribute("aria-hidden", "true")
@@ -246,7 +242,6 @@ const createCards = (list) => {
 
                 const modalHeader = document.createElement("div")
                 modalHeader.setAttribute("class", "modal-header")
-                /*modalContent.appendChild(modalHeader)*/
 
                 const modalTitle = document.createElement("h5")
                 modalTitle.setAttribute("class", "modal-title")
@@ -257,8 +252,6 @@ const createCards = (list) => {
                 const modalCloseButton = document.createElement("btn")
                 modalCloseButton.setAttribute("type", "button")
                 modalCloseButton.setAttribute("class", "close")
-                /*modalCloseButton.setAttribute("data-dismiss", "modal")
-                modalCloseButton.setAttribute("aria-label", "Close")*/
                 modalHeader.appendChild(modalCloseButton)
 
                 const modalCloseButtonSpan = document.createElement("span")
@@ -287,7 +280,6 @@ const createCards = (list) => {
                 function closeModal () {
                     modalImages.style.display = "none"
                 }
-        
             }
 
             function videoEnlarge() {
@@ -348,20 +340,17 @@ const createCards = (list) => {
 }
 
 
-
 function warp() {
     starryBgLoop.playbackRate = 10
     ufo.classList.replace("ufo", "warp")
 
-    function smallUfo() {
-    // ufoImage.style.width = "100px"
-    ufo.style.display = "none"
-    ufo.classList.replace("warp", "smallUfo")
-    headerDataPage.style.display = "block"
-    searchContainer.style.display = "grid"
-    starryBgLoop.playbackRate = 1
-    particlesJs.style.display = "none"
+    function noUfo() {
+        ufo.style.display = "none"
+        starryBgLoop.playbackRate = 1
+        particlesJs.style.display = "none"
+        headerDataPage.style.display = "block"
+        searchContainer.style.display = "grid"
     } 
-    setTimeout(smallUfo, 6000)
+    setTimeout(noUfo, 6000)
 }
 
